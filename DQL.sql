@@ -61,3 +61,13 @@ SELECT
   AVG(s.precio) AS promedio_precio
 FROM servicios s
 GROUP BY s.nombre;
+
+
+SELECT 
+  nombre,
+  IF(vacunada = 1, 'Sí', 'No') AS esta_vacunada
+FROM mascotas;
+
+SELECT nombre 
+FROM mascotas 
+WHERE LENGTH(nombre) < 5;

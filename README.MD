@@ -116,74 +116,89 @@ JOIN (
 ) AS datos ON m.id = datos.id;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 4. Función de agregación: COUNT
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT COUNT(*) AS total_visitas FROM visitas;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 5. Función de agregación: AVG
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT AVG(precio) AS precio_promedio_servicios FROM servicios;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 6. Función de agregación: MAX
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT MAX(precio) AS servicio_mas_caro FROM servicios;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 7. Uso de CONCAT
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT CONCAT(nombre, ' (', sexo, ')') AS nombre_completo FROM mascotas;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 8. UPPER y LOWER
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT UPPER(nombre) AS nombre_mayuscula, LOWER(sexo) AS sexo_minuscula FROM mascotas;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 9. Funciones LENGTH, SUBSTRING, TRIM
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT 
+  nombre,
+  LENGTH(nombre) AS largo_nombre,
+  SUBSTRING(nombre, 1, 3) AS primeras_letras,
+  TRIM(nombre) AS nombre_sin_espacios
+FROM mascotas;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 10. Función ROUND
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT nombre, ROUND(precio, 2) AS precio_redondeado FROM servicios;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 11. Uso de JOIN con alias
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT 
+  v.fecha, 
+  m.nombre AS mascota, 
+  s.nombre AS servicio, 
+  d.nombre AS dueno
+FROM visitas v
+JOIN mascotas m ON v.id_mascota = m.id
+JOIN servicios s ON v.id_servicio = s.id
+JOIN duenios d ON m.id_duennio = d.id;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 12. Agregación con GROUP BY
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT 
+  m.nombre AS mascota, 
+  COUNT(v.id) AS cantidad_visitas
+FROM visitas v
+JOIN mascotas m ON v.id_mascota = m.id
+GROUP BY m.nombre;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 13. Agregación con GROUP BY y alias
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT 
+  s.nombre AS servicio, 
+  AVG(s.precio) AS promedio_precio
+FROM servicios s
+GROUP BY s.nombre;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 14. Uso de IF en campos
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT 
+  nombre,
+  IF(vacunada = 1, 'Sí', 'No') AS esta_vacunada
+FROM mascotas;
 ```
 
-### 1. Crear una tabla a partir de una consulta
+### 15. Mascotas con nombre corto
 ```sql
-CREATE TABLE mascotas_vacunadas AS
-SELECT * FROM mascotas WHERE vacunada = 1;
+SELECT nombre 
+FROM mascotas 
+WHERE LENGTH(nombre) < 5;
 ```
